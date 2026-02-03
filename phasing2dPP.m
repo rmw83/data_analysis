@@ -77,14 +77,20 @@ w = w(1:ind);
 function [phase,ph,delta_t_fringes,i_fit] = phasingFinalPhase(n_pairs,abs_array,phase_array,w,i_max)
 %phasingFinalPhase
 global c_cmfs wavenumbersToInvFs fringeToFs
-n_fit_points = 5;
-fit_points_offset = (n_fit_points-1)/2;
+%n_fit_points = 5;
+%fit_points_offset = (n_fit_points-1)/2;
+
+var = movvar(abs_array, floor(sqrt(length(abs_array))));
+varbool = var >= mean(var);
+findvarbool = find(varbool);
+fit_points_offset = floor(length(findvarbool)/2);
+[~,i_max] = findvarbool(offset);
 
 %rough guess
 %tau = 1/w(i_max)/wavenumbersToInvFs;
 disp(['rough guess frequency ' num2str(w(i_max))]);
 
-w0 = peakpos(w(i_max-2:i_max+2),abs_array(1,i_max-2:i_max+2));
+w0 = peakpos(w(i_max-fit_points_offset:i_max+fit_points_offset),abs_array(1,i_max-fit_points_offset:i_max+fit_points_offset));
 disp(['refined guess frequency ' num2str(w0)]);
 %refine guess
 tau = 1/w0/wavenumbersToInvFs;
