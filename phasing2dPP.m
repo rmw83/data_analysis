@@ -84,7 +84,7 @@ var = movvar(abs_array, floor(sqrt(length(abs_array))));
 varbool = var >= mean(var);
 findvarbool = find(varbool);
 fit_points_offset = floor(length(findvarbool)/2);
-[~,i_max] = findvarbool(offset);
+[~,i_max] = findvarbool(fit_points_offset);
 
 %rough guess
 %tau = 1/w(i_max)/wavenumbersToInvFs;
