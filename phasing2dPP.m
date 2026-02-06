@@ -83,7 +83,7 @@ global c_cmfs wavenumbersToInvFs fringeToFs
 var = movvar(abs_array, floor(sqrt(length(abs_array))));
 varbool = var >= 0.5*max(var);
 findvarbool = find(varbool);
-fit_points_offset = floor(findvarbool(end) - findvarbool(1))/2;
+fit_points_offset = floor((findvarbool(end) - findvarbool(1))/2);
 i_max = findvarbool(1) + fit_points_offset;
 
 %rough guess
